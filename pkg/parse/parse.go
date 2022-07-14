@@ -78,11 +78,11 @@ func genericEventHandler(event map[string]interface{}, eventName string) (string
 }
 
 func pushHandler(event map[string]interface{}, eventName string) (string, error) {
-	payload := event["https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246"]
+	payload := event["head_commit"]
 	for key, value := range payload.(map[string]interface{}) {
 		switch value.(type) {
 		case string:
-			if key == "head_commit" {
+			if key == "url" {
 				return value.(string), nil
 			}
 			continue

@@ -58,12 +58,12 @@ func TestGetGithubActionPayloadURL(t *testing.T) {
 			eventPath: "data/issues.json",
 			want:      "https://github.com/Codertocat/Hello-World/issues/1",
 		},
-		// {
-		// 	name:      "GITHUB_EVENT_NAME is push",
-		// 	eventName: "push",
-		// 	eventPath: "data/push.json",
-		// 	want:      "https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246",
-		// },
+		{
+			name:      "GITHUB_EVENT_NAME is push",
+			eventName: "push",
+			eventPath: "data/push.json",
+			want:      "https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246",
+		},
 		{
 			name:      "GITHUB_EVENT_NAME is pull_request",
 			eventName: "pull_request",

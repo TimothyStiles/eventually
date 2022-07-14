@@ -5,7 +5,7 @@ outputs:
   errorMessage:
     description: 'This action failed to run.'
   sentMessage:
-    description: 'the GITHUB.EVENT_URL is {{GITHUB.EVENT_URL}}'
+    description: 'the env.EVENT_URL is {{env.EVENT_URL}}'
 runs:
   using: docker
   image: Dockerfile

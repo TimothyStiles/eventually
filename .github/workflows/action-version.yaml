@@ -1,4 +1,4 @@
-name: Release new tweeter version
+name: Release new  version
 on:
   release:
     types: [released]
