@@ -1,4 +1,4 @@
-name: Eventually
+name: EventuallyURL
 author: Timothy Stiles
 description: adds the URL of the triggered event's payload to GITHUB.EVENT_URL.
 outputs:
