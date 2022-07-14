@@ -2,14 +2,13 @@ package parse
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 
 	"github.com/pkg/errors"
 )
 
 var eventHandlerMap = map[string]func(map[string]interface{}, string) (string, error){
-	"push":                        genericEventHandler,
+	"push":                        pushHandler,
 	"pull_request":                genericEventHandler,
 	"issue":                       genericEventHandler, // in corner case map
 	"issue_comment":               genericEventHandler,
@@ -26,7 +25,7 @@ var eventCornerCasesMap = map[string]string{
 	// push:          "push",
 }
 
-// get Github action payload
+// GetGithubActionPayloadURL returns the payload URL for the Github Action.
 func GetGithubActionPayloadURL() (string, error) {
 	eventPath := os.Getenv("GITHUB_EVENT_PATH")
 	if eventPath == "" {
@@ -65,10 +64,25 @@ func GetGithubActionPayloadURL() (string, error) {
 func genericEventHandler(event map[string]interface{}, eventName string) (string, error) {
 	payload := event[eventName]
 	for key, value := range payload.(map[string]interface{}) {
-		fmt.Println(key, value)
 		switch value.(type) {
 		case string:
 			if key == "html_url" {
+				return value.(string), nil
+			}
+			continue
+		default:
+			// return "", errors.Errorf("unexpected type %T", value)
+		}
+	}
+	return "", nil
+}
+
+func pushHandler(event map[string]interface{}, eventName string) (string, error) {
+	payload := event["https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246"]
+	for key, value := range payload.(map[string]interface{}) {
+		switch value.(type) {
+		case string:
+			if key == "head_commit" {
 				return value.(string), nil
 			}
 			continue
