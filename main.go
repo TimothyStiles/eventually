@@ -8,5 +8,5 @@ import (
 
 func main() {
 	payloadURL, _ := parse.GetGithubActionPayloadURL()
-	os.Setenv("GITHUB_PAYLOAD_URL", payloadURL)
+	os.Setenv("GITHUB.EVENT_URL", payloadURL)
 }
